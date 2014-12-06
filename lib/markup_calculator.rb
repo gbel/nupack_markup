@@ -16,8 +16,8 @@ class MarkupCalc
         @req_persons = kwargs[:req_persons]
     end
 
-    def sanitized_category()
-        return category.to_sym.downcase
+    def sanitized_category
+        category.to_sym.downcase
     end
 
     def validate_req_params(args = {})
@@ -32,15 +32,15 @@ class MarkupCalc
         end
     end
 
-    def apply_flat_markup()
-        return base_price * FLAT_MARKUP
+    def apply_flat_markup
+        base_price * FLAT_MARKUP
     end
 
-    def person_markup_total()
-        return req_persons * PERSON_MARKUP
+    def person_markup_total
+        req_persons * PERSON_MARKUP
     end
 
-    def category_markup_total()
+    def category_markup_total
         cat = sanitized_category()
         if cat == :drugs
             return DRUGS_MARKUP
@@ -53,7 +53,9 @@ class MarkupCalc
         end
     end
 
-    def estimated_cost()
+    def estimated_cost
         (apply_flat_markup() * (1 + category_markup_total() + person_markup_total())).round(2)
     end
+
+    private :sanitized_category, :validate_req_params, :apply_flat_markup, :person_markup_total, :category_markup_total
 end

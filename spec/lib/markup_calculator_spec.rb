@@ -16,25 +16,25 @@ describe MarkupCalc do
         markup = MarkupCalc.new(:base_price => 123,
                                 :category => 'Food',
                                 :req_persons => 1)
-        expect(markup.sanitized_category()).to be(:food)
+        expect(markup.send(:sanitized_category)).to be(:food)
     end
     it "should add the flat markup of 5%" do 
         markup = MarkupCalc.new(:base_price => 123,
                                 :category => 'Food',
                                 :req_persons => 1)
-        expect(markup.apply_flat_markup()).to eq(129.15)
+        expect(markup.send(:apply_flat_markup)).to eq(129.15)
     end
     it "should add markup for required persons" do
         markup = MarkupCalc.new(:base_price => 123,
                                 :category => 'Food',
                                 :req_persons => 2)
-        expect(markup.person_markup_total()).to eq(0.024)
+        expect(markup.send(:person_markup_total)).to eq(0.024)
     end
     it "should add markup for predefined categories ('electronics', 'food', 'drugs')" do
         markup = MarkupCalc.new(:base_price => 123,
                                 :category => 'Food',
                                 :req_persons => 2)
-        expect(markup.category_markup_total()).to eq(0.13)
+        expect(markup.send(:category_markup_total)).to eq(0.13)
     end
     it "should return repackaging estimated cost" do
         input_1 = MarkupCalc.new(:base_price => 1299.99,
