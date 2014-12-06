@@ -1,6 +1,7 @@
 MarkupCalcArgError = Class.new(ArgumentError)
 
 class MarkupCalc
+    FLATMARKUP = 1.05
     attr_reader :base_price, :category, :req_persons
 
     def initialize(**kwargs)
@@ -24,5 +25,9 @@ class MarkupCalc
         unless args[:req_persons]
             raise MarkupCalcArgError.new("Missing number of workers")
         end
+    end
+
+    def apply_flat_markup()
+        return base_price * FLATMARKUP
     end
 end
