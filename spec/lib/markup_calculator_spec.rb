@@ -27,7 +27,28 @@ describe MarkupCalc do
     it "should add markup for required persons" do
         markup = MarkupCalc.new(:base_price => 123,
                                 :category => 'Food',
-                                :req_persons => 1)
-        expect(markup.person_markup_total()).to eq(1.012)
+                                :req_persons => 2)
+        expect(markup.person_markup_total()).to eq(0.024)
+    end
+    it "should add markup for predefined categories ('electronics', 'food', 'drugs')" do
+        markup = MarkupCalc.new(:base_price => 123,
+                                :category => 'Food',
+                                :req_persons => 2)
+        expect(markup.category_markup_total()).to eq(0.13)
+    end
+    it "should return repackaging estimated cost" do
+        input_1 = MarkupCalc.new(:base_price => 1299.99,
+                                 :category => 'food',
+                                 :req_persons => 3)
+        input_2 = MarkupCalc.new(:base_price => 5432.00,
+                                 :category => 'drugs',
+                                 :req_persons => 1)
+        input_3 = MarkupCalc.new(:base_price => 12456.95,
+                                 :category => 'books',
+                                 :req_persons => 4)
+        expect(input_1.estimated_cost()).to eq(1591.58)
+        expect(input_2.estimated_cost()).to eq(6199.81)
+        expect(input_3.estimated_cost()).to eq(13707.63)
+
     end
 end
