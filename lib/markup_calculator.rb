@@ -2,6 +2,8 @@ MarkupCalcArgError = Class.new(ArgumentError)
 
 class MarkupCalc
     FLATMARKUP = 1.05
+    PERSONMARKUP = 1.012
+
     attr_reader :base_price, :category, :req_persons
 
     def initialize(**kwargs)
@@ -29,5 +31,9 @@ class MarkupCalc
 
     def apply_flat_markup()
         return base_price * FLATMARKUP
+    end
+
+    def person_markup_total()
+        return req_persons * PERSONMARKUP
     end
 end

@@ -24,4 +24,10 @@ describe MarkupCalc do
                                 :req_persons => 1)
         expect(markup.apply_flat_markup()).to eq(129.15)
     end
+    it "should add markup for required persons" do
+        markup = MarkupCalc.new(:base_price => 123,
+                                :category => 'Food',
+                                :req_persons => 1)
+        expect(markup.person_markup_total()).to eq(1.012)
+    end
 end
