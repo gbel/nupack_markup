@@ -1,0 +1,2 @@
+class MarkupCalc
+end
